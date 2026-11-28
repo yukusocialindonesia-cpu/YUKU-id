@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ChevronLeft, ChevronRight, ShieldCheck } from 'lucide-react';
 import { SearchActivityWidget } from './SearchActivityWidget';
 import { HeroSlideRow } from '../../types/database';
@@ -46,6 +47,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onRegisterCustomerClick,
   onSlideLinkClick,
 }) => {
+  const reduceMotion = useReducedMotion();
   const [slides, setSlides] = useState<HeroSlideRow[]>(() => readCachedSlides());
   const [slidesLoaded, setSlidesLoaded] = useState(false);
   const [active, setActive] = useState(0);
@@ -126,6 +128,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         setPaused(false);
       }}
     >
+      {!reduceMotion && (
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-16 -top-20 z-10 h-48 w-48 rounded-full bg-purple-400/15 blur-3xl md:h-72 md:w-72"
+          animate={{ x: [0, -14, 0], y: [0, 16, 0], scale: [1, 1.08, 1] }}
+          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      )}
       {/* Gambar slide (crossfade): banner rasio tetap di HP, lapisan penuh di layar lebar.
           Rasio 12:5 sama dengan gambar desktop 1920x800, jadi foto tampil utuh di HP. */}
       {/* HP: banner foto di atas (tanpa teks menimpa wajah). md ke atas: lapisan penuh seperti semula. */}
@@ -137,8 +147,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <div
                 key={slide.id}
                 aria-hidden={!isCurrent}
-                className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${
-                  isCurrent ? 'opacity-100' : 'opacity-0'
+                className={`absolute inset-0 transition-[opacity,transform] duration-700 motion-reduce:transition-none ${
+                  isCurrent ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'
                 }`}
               >
                 {broken[slide.id] ? (

@@ -103,7 +103,7 @@ export const ActivityCategories: React.FC<ActivityCategoriesProps> = ({ onSelect
                 type="button"
                 key={cat.id}
                 onClick={() => onSelectCategory(cat.id)}
-                className="group flex min-h-[72px] w-[84px] shrink-0 snap-start flex-col items-center justify-center gap-1.5 rounded-2xl border border-[#6C1DC9]/10 bg-white px-2 py-2 text-center text-[#6C1DC9] shadow-[0_3px_10px_rgba(108,29,201,0.04)] transition hover:border-[#6C1DC9]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6C1DC9]/30 sm:min-h-[88px] sm:w-[104px] sm:gap-2 sm:rounded-2xl sm:py-3"
+                className="group flex min-h-[72px] w-[84px] shrink-0 snap-start flex-col items-center justify-center gap-1.5 rounded-2xl border border-[#6C1DC9]/10 bg-white px-2 py-2 text-center text-[#6C1DC9] shadow-[0_3px_10px_rgba(108,29,201,0.04)] transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-[#6C1DC9]/30 hover:shadow-[0_7px_16px_rgba(108,29,201,0.10)] active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6C1DC9]/30 motion-reduce:transform-none sm:min-h-[88px] sm:w-[104px] sm:gap-2 sm:rounded-2xl sm:py-3"
               >
                 <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#6C1DC9] text-white sm:h-9 sm:w-9">
                   {getIcon(cat.iconName)}

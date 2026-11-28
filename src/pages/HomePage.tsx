@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { Users, BriefcaseBusiness, Search } from 'lucide-react';
 import { HeroSection } from '../components/home/HeroSection';
 import { ServiceModeSection } from '../components/home/ServiceModeSection';
@@ -21,6 +22,13 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
+  const reduceMotion = useReducedMotion();
+  const reveal = (delay = 0) => reduceMotion ? {} : {
+    initial: { opacity: 0, y: 16 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.12 },
+    transition: { duration: 0.48, delay, ease: 'easeOut' as const },
+  };
   const [promotions, setPromotions] = useState<PromotionRow[]>([]);
   const [isLoadingPromotions, setIsLoadingPromotions] = useState(true);
   const promoSectionRef = useRef<HTMLDivElement | null>(null);
@@ -81,7 +89,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
   return (
     <div className="yuku-home-feed relative isolate flex min-h-screen flex-col overflow-hidden bg-[#F6F1FF] text-[#6C1DC9]">
-      <section className="px-4 pt-3 pb-2 md:hidden">
+      <motion.section {...reveal(0)} className="px-4 pt-3 pb-2 md:hidden">
         <div className="flex items-center justify-between gap-3">
           <div className="flex min-w-0 items-center gap-2.5">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#6C1DC9] text-[15px] font-black tracking-tight text-white shadow-[0_5px_14px_rgba(108,29,201,0.18)]">Y</div>
@@ -119,57 +127,57 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </span>
           </button>
         </div>
-      </section>
+      </motion.section>
 
-      <div className="yuku-home-hero hidden md:block">
+      <motion.div {...reveal(0.04)} className="yuku-home-hero hidden md:block">
         <HeroSection
           onExploreClick={() => onNavigate('/talent')}
           onSearch={handleSearch}
           onRegisterCustomerClick={() => onNavigate('/register')}
           onSlideLinkClick={(path) => onNavigate(path as AppRoute)}
         />
-      </div>
+      </motion.div>
 
-      <div className="yuku-home-section yuku-home-categories">
+      <motion.div {...reveal(0.04)} className="yuku-home-section yuku-home-categories">
         <ActivityCategories onSelectCategory={handleSelectCategory} />
-      </div>
+      </motion.div>
 
-      <div className="hidden sm:block yuku-home-section bg-white">
+      <motion.div {...reveal(0.06)} className="hidden sm:block yuku-home-section bg-white">
         <ServiceModeSection onSelectMode={(mode) => onNavigate('/talent', { mode })} />
-      </div>
+      </motion.div>
 
-      <div className="yuku-home-section yuku-home-featured">
+      <motion.div {...reveal(0.08)} className="yuku-home-section yuku-home-featured">
         <FeaturedTalentSection
           onSelectTalent={handleSelectTalent}
           onViewAllClick={() => onNavigate('/talent')}
         />
-      </div>
+      </motion.div>
 
-      <div className="yuku-home-section"><ProfessionalServicesSection onViewAll={() => onNavigate('/jasa-profesional')} /></div>
-      <div className="hidden sm:block yuku-home-section"><EcosystemSection onCommunityClick={() => onNavigate('/komunitas')} onMerchantClick={() => onNavigate('/merchant-partner')} /></div>
+      <motion.div {...reveal(0.1)} className="yuku-home-section"><ProfessionalServicesSection onViewAll={() => onNavigate('/jasa-profesional')} /></motion.div>
+      <motion.div {...reveal(0.12)} className="hidden sm:block yuku-home-section"><EcosystemSection onCommunityClick={() => onNavigate('/komunitas')} onMerchantClick={() => onNavigate('/merchant-partner')} /></motion.div>
 
-      <div className="hidden sm:block yuku-home-section bg-white">
+      <motion.div {...reveal(0.14)} className="hidden sm:block yuku-home-section bg-white">
         <HowItWorksSection onLearnMoreClick={() => onNavigate('/cara-kerja')} />
         <SafetySection />
-      </div>
+      </motion.div>
 
-      <div ref={promoSectionRef} className="hidden sm:block yuku-home-section bg-[#F6F1FF]">
+      <motion.div {...reveal(0.16)} ref={promoSectionRef} className="hidden sm:block yuku-home-section bg-[#F6F1FF]">
         <PromoCarousel
           promotions={promotions}
           isLoading={isLoadingPromotions}
           onNavigate={onNavigate}
         />
-      </div>
+      </motion.div>
 
-      <div className="hidden sm:block">
+      <motion.div {...reveal(0.18)} className="hidden sm:block">
         <TalentCtaSection
           onExploreClick={() => onNavigate('/talent')}
           onRegisterCustomerClick={() => onNavigate('/register')}
           onRegisterClick={() => onNavigate('/daftar-talent')}
           onProfessionalRegisterClick={() => onNavigate('/daftar-jasa-profesional')}
         />
-      </div>
-      <div className="hidden sm:block"><HomeFaqSection onViewAllFaqClick={() => onNavigate('/faq')} /></div>
+      </motion.div>
+      <motion.div {...reveal(0.2)} className="hidden sm:block"><HomeFaqSection onViewAllFaqClick={() => onNavigate('/faq')} /></motion.div>
     </div>
   );
 };

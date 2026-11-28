@@ -74,14 +74,14 @@ export const TalentCard: React.FC<TalentCardProps> = ({ talent, onSelect, availa
         role="button"
         tabIndex={0}
         aria-label={`Lihat profil ${talent.name}`}
-        className="group relative min-w-0 overflow-hidden rounded-[18px] bg-white shadow-[0_5px_18px_rgba(108,29,201,0.12)] ring-1 ring-purple-100/80 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-600"
+        className="group relative min-w-0 overflow-hidden rounded-[18px] bg-white shadow-[0_5px_18px_rgba(108,29,201,0.12)] ring-1 ring-purple-100/80 cursor-pointer transition-transform duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-600"
       >
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#EFF6FF]">
           {hasRealPhoto ? (
             <img
               src={talent.avatarUrl}
               alt={`Foto profil ${talent.name}`}
-              className="h-full w-full object-cover object-[50%_25%] transition-transform duration-500 group-hover:scale-[1.04]"
+              className="h-full w-full object-cover object-[50%_25%] transition-transform duration-500 group-hover:scale-[1.04] group-active:scale-[1.06]"
               loading="lazy"
               decoding="async"
               referrerPolicy="no-referrer"
@@ -148,7 +148,7 @@ export const TalentCard: React.FC<TalentCardProps> = ({ talent, onSelect, availa
       role="button"
       tabIndex={0}
       aria-label={`Lihat profil ${talent.name}`}
-      className="group relative h-full min-w-0 bg-white/95 rounded-xl sm:rounded-[26px] overflow-hidden border border-white shadow-[0_8px_24px_rgba(108,29,201,0.09)] hover:shadow-[0_18px_38px_rgba(108,29,201,0.15)] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer flex flex-col ring-1 ring-purple-100/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-600"
+      className="group relative h-full min-w-0 bg-white/95 rounded-xl sm:rounded-[26px] overflow-hidden border border-white shadow-[0_8px_24px_rgba(108,29,201,0.09)] hover:shadow-[0_18px_38px_rgba(108,29,201,0.15)] hover:-translate-y-0.5 active:scale-[0.99] transition-all duration-300 cursor-pointer flex flex-col ring-1 ring-purple-100/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-600"
     >
       {/* Media */}
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-slate-100">
@@ -156,7 +156,7 @@ export const TalentCard: React.FC<TalentCardProps> = ({ talent, onSelect, availa
           <img
             src={talent.avatarUrl}
             alt={`Foto profil ${talent.name}`}
-            className="w-full h-full object-cover object-[50%_22%] group-hover:scale-[1.03] transition-transform duration-500"
+            className="w-full h-full object-cover object-[50%_22%] group-hover:scale-[1.03] group-active:scale-[1.05] transition-transform duration-500"
             loading="lazy"
             decoding="async"
             referrerPolicy="no-referrer"
